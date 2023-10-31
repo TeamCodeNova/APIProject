@@ -1,4 +1,4 @@
-package com.example.podcastapi.ui.theme
+package com.example.apiproject.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

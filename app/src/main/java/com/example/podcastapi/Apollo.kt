@@ -1,4 +1,4 @@
-package com.example.podcastapi
+package com.example.apiproject
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient

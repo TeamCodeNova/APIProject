@@ -1,4 +1,4 @@
-package com.example.podcastapi
+package com.example.apiproject
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.apollographql.apollo3.exception.ApolloException
-import com.example.podcastapi.SearchForTermQuery
-import com.example.podcastapi.SearchForTermQuery as SearchQuery
+import com.example.apiproject.SearchForTermQuery
+import com.example.apiproject.SearchForTermQuery as SearchQuery
 import kotlinx.coroutines.launch
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.podcastapi
+package com.example.apiproject
 
 import org.junit.Test
 

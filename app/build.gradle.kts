@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.podcastapi"
+    namespace = "com.example.apiproject"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.podcastapi"
+        applicationId = "com.example.apiproject"
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -76,6 +76,6 @@ dependencies {
 
 apollo {
     service("service") {
-        packageName.set("com.example.podcastapi")
+        packageName.set("com.example.apiproject")
     }
 }

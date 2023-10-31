@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PodcastAPI"
+rootProject.name = "APIProject"
 include(":app")
