@@ -1,6 +1,7 @@
 package com.example.apiproject
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
@@ -15,7 +16,7 @@ import com.example.apiproject.SearchForTermQuery as SearchQuery
 import kotlinx.coroutines.launch
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(onNavigate: () -> Unit) {
     var query by remember { mutableStateOf("") }
     var state by remember { mutableStateOf<SearchState>(SearchState.Empty) }
     val scope = rememberCoroutineScope()
@@ -60,17 +61,20 @@ fun SearchScreen() {
         when (val s = state) {
             SearchState.Loading -> CircularProgressIndicator()
             is SearchState.Error -> Text(text = s.message, color = Color.Red)
-            is SearchState.Success -> PodcastList(data = s.data.searchForTerm?.podcastSeries)
+            is SearchState.Success -> PodcastList(data = s.data.searchForTerm?.podcastSeries, onPodcastClick = { podcast ->
+                onNavigate()
+            })
             SearchState.Empty -> {}
         }
     }
 }
 
 @Composable
-fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?) {
+fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?, onPodcastClick: (SearchForTermQuery.PodcastSeries?) -> Unit) {
     data?.let {
         it.forEach { podcast ->
-            Text(text = "Name: ${podcast?.name}, UUID: ${podcast?.uuid}, RSS URL: ${podcast?.rssUrl}")
+            Text(text = "Name: ${podcast?.name}, UUID: ${podcast?.uuid}, RSS URL: ${podcast?.rssUrl}",
+                modifier = Modifier.clickable { onPodcastClick(podcast) })
         }
     }
 }
