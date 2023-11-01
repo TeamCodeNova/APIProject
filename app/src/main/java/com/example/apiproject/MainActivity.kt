@@ -9,9 +9,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import com.example.apiproject.ui.theme.APIProjectTheme
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,20 +31,31 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainNavHost() {
     val navController = rememberNavController()
+
     Column {
-        // Add the AppHeader at the top of the navigation host
         AppHeader(navController = navController)
 
-        // Use the available space below the header for the NavHost
         Box(modifier = Modifier.weight(1f)) {
             NavHost(navController, startDestination = NavigationDestinations.SEARCH_SCREEN) {
                 composable(route = NavigationDestinations.SEARCH_SCREEN) {
-                    SearchScreen(onNavigate = {
-                        navController.navigate(NavigationDestinations.PODCAST_DETAIL)
+                    SearchScreen(onNavigate = { selectedPodcast ->
+                        navController.navigate("${NavigationDestinations.PODCAST_DETAIL}/${selectedPodcast.uuid}")
                     })
                 }
-                composable(route = NavigationDestinations.PODCAST_DETAIL) {
-                    PodcastDetailScreen()
+                composable(
+                    route = NavigationDestinations.PODCAST_DETAIL + "/{podcastUUID}",
+                    arguments = listOf(navArgument("podcastUUID") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val podcastUUID = backStackEntry.arguments?.getString("podcastUUID")
+                    println("podcastUUID: $podcastUUID")
+
+                    val podcast = SharedPodcastRepository.podcasts?.find { it?.uuid == podcastUUID }
+
+                    println("Retrieved podcast: $podcast")
+
+                    if (podcast != null) {
+                        PodcastDetailScreen(podcast)
+                    }
                 }
                 composable(route = NavigationDestinations.FAVORITES_SCREEN) {
                     FavoritesScreen()

@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.security:security-crypto:1.1.0-alpha05")
     implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("com.apollographql.apollo3:apollo-runtime")
 

@@ -1,7 +1,6 @@
 package com.example.apiproject
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
@@ -11,12 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.apollographql.apollo3.exception.ApolloException
-import com.example.apiproject.SearchForTermQuery
 import com.example.apiproject.SearchForTermQuery as SearchQuery
 import kotlinx.coroutines.launch
 
 @Composable
-fun SearchScreen(onNavigate: () -> Unit) {
+fun SearchScreen(onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
     var query by remember { mutableStateOf("") }
     var state by remember { mutableStateOf<SearchState>(SearchState.Empty) }
     val scope = rememberCoroutineScope()
@@ -61,20 +59,20 @@ fun SearchScreen(onNavigate: () -> Unit) {
         when (val s = state) {
             SearchState.Loading -> CircularProgressIndicator()
             is SearchState.Error -> Text(text = s.message, color = Color.Red)
-            is SearchState.Success -> PodcastList(data = s.data.searchForTerm?.podcastSeries, onPodcastClick = { podcast ->
-                onNavigate()
-            })
-            SearchState.Empty -> {}
-        }
-    }
-}
+            is SearchState.Success -> {
+                println("Storing to view model: ${s.data.searchForTerm?.podcastSeries?.size}")
+                SharedPodcastRepository.podcasts = s.data.searchForTerm?.podcastSeries
 
-@Composable
-fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?, onPodcastClick: (SearchForTermQuery.PodcastSeries?) -> Unit) {
-    data?.let {
-        it.forEach { podcast ->
-            Text(text = "Name: ${podcast?.name}, UUID: ${podcast?.uuid}, RSS URL: ${podcast?.rssUrl}",
-                modifier = Modifier.clickable { onPodcastClick(podcast) })
+                PodcastList(data = s.data.searchForTerm?.podcastSeries, onPodcastClick = { selectedPodcast ->
+                    println("Navigating to podcast with UUID: ${selectedPodcast?.uuid}")
+
+                    if (selectedPodcast != null) {
+                        onNavigate(selectedPodcast)
+                    }
+                })
+            }
+
+            SearchState.Empty -> {}
         }
     }
 }
@@ -84,4 +82,8 @@ private sealed interface SearchState {
     object Loading : SearchState
     data class Error(val message: String) : SearchState
     data class Success(val data: SearchQuery.Data) : SearchState
+}
+
+object SharedPodcastRepository {
+    var podcasts: List<SearchQuery.PodcastSeries?>? = null
 }
