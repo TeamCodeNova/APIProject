@@ -1,7 +1,8 @@
-query SearchForTerm($term: String!, $filterForTypes: [TaddyType]) {
+query SearchForTerm($term: String!, $filterForGenres: [Genre], $sortByDatePublished: SortOrder) {
     searchForTerm(
         term: $term
-        filterForTypes: $filterForTypes
+        filterForGenres: $filterForGenres
+        sortByDatePublished: $sortByDatePublished
     ) {
         searchId
         podcastSeries {
