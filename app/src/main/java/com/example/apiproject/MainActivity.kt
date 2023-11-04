@@ -66,6 +66,9 @@ private fun MainNavHost() {
                 composable(route = NavigationDestinations.ACCOUNT_SCREEN) {
                     AccountScreen()
                 }
+                composable(route = NavigationDestinations.LOGIN_SCREEN) {
+                    LoginScreen()
+                }
             }
         }
     }

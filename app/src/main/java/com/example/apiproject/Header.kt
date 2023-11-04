@@ -46,6 +46,12 @@ fun AppHeader(navController: NavController) {
         ) {
             Text(text = "Account")
         }
+        TextButton(
+            onClick = { navController.navigate(NavigationDestinations.LOGIN_SCREEN) },
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = "Login")
+        }
     }
 }
 
