@@ -1,2 +1,2 @@
 # APIProject
-A repo for out class project
+A repo for our class project
