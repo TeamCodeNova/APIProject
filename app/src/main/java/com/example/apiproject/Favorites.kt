@@ -13,6 +13,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -26,7 +28,8 @@ fun Favorites() {
     val dbHandler = remember { DBHandler(context) }
     val favorites = remember { mutableStateListOf<SearchForTermQuery.PodcastSeries>() }
 
-    LaunchedEffect(Unit) {
+    fun refreshFavorites() {
+        favorites.clear()
         val cursor = dbHandler.getAllFavorites()
         while (cursor.moveToNext()) {
             val podcast = SearchForTermQuery.PodcastSeries(
@@ -48,15 +51,33 @@ fun Favorites() {
         cursor.close()
     }
 
-    LazyColumn {
+    LaunchedEffect(Unit) {
+        refreshFavorites()
+    }
+
+    LazyColumn(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp)) {
         items(favorites) { podcast ->
-            FavoritePodcastItem(podcast, dbHandler)
+            Text(
+                text = "Favorites",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            FavoritePodcastItem(podcast, dbHandler, refreshFavorites = { refreshFavorites() })
         }
     }
 }
 
 @Composable
-fun FavoritePodcastItem(podcast: SearchForTermQuery.PodcastSeries, dbHandler: DBHandler) {
+fun FavoritePodcastItem(
+    podcast: SearchForTermQuery.PodcastSeries,
+    dbHandler: DBHandler,
+    refreshFavorites: () -> Unit
+) {
     val context = LocalContext.current
 
     Column(modifier = Modifier.padding(8.dp)) {
@@ -73,8 +94,10 @@ fun FavoritePodcastItem(podcast: SearchForTermQuery.PodcastSeries, dbHandler: DB
 
         Row {
             Button(onClick = {
-                podcast.uuid?.let { dbHandler.deleteFavorite(it) }
-                // Update UI accordingly
+                podcast.uuid?.let {
+                    dbHandler.deleteFavorite(it)
+                    refreshFavorites()
+                }
             }) {
                 Text("Remove")
             }
@@ -113,12 +136,12 @@ fun parseGenres(genresString: String?): List<Genre> {
 
 fun parseLanguage(languageString: String?): Language? {
     return languageString?.let {
-        Language.values().find { it.name == it.toString().trim() }
+        Language.values().find { lang -> lang.name == it.trim() }
     }
 }
 
 fun parseContentType(contentTypeString: String?): PodcastContentType? {
     return contentTypeString?.let {
-        PodcastContentType.values().find { it.name == it.toString().trim() }
+        PodcastContentType.values().find { type -> type.name == it.trim() }
     }
 }
