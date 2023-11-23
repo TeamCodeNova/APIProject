@@ -60,7 +60,7 @@ fun Favorites() {
         .padding(16.dp)) {
         items(favorites) { podcast ->
             Text(
-                text = "Favorites",
+                text = "Your Favorites",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
