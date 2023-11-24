@@ -31,6 +31,9 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
     val context = LocalContext.current
     val currentPodcast = rememberUpdatedState(podcast)
 
+    // Initialize DBHandler
+    val dbHandler = DBHandler(context)
+
     fun openWebsite() {
         val websiteUrl = currentPodcast.value.websiteUrl
         if (!websiteUrl.isNullOrBlank()) {
@@ -53,7 +56,6 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
                 .height(200.dp)
                 .clip(RoundedCornerShape(8.dp))
         )
-
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -90,6 +92,10 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+
+        // Button to add to favorites
+        Button(onClick = { dbHandler.addFavorite(podcast) }) {
+            Text("Add to Favorites")
+        }
     }
 }
-
