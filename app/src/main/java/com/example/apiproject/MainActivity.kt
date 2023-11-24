@@ -57,11 +57,11 @@ private fun MainNavHost() {
                         PodcastDetailScreen(podcast)
                     }
                 }
-                composable(route = NavigationDestinations.FAVORITES_SCREEN) {
-                    FavoritesScreen()
-                }
                 composable(route = NavigationDestinations.ABOUT_SCREEN) {
                     AboutScreen()
+                }
+                composable(route = NavigationDestinations.FAVORITES_SCREEN) {
+                    Favorites()
                 }
                 composable(route = NavigationDestinations.ACCOUNT_SCREEN) {
                     AccountScreen()
