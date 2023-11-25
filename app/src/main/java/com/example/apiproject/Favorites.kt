@@ -4,10 +4,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -55,19 +57,40 @@ fun Favorites() {
         refreshFavorites()
     }
 
-    LazyColumn(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
-        items(favorites) { podcast ->
-            Text(
-                text = "Your Favorites",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            FavoritePodcastItem(podcast, dbHandler, refreshFavorites = { refreshFavorites() })
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(
+            text = "Your Favorites",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFFADD8E6))
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Divider(
+            color = Color.Gray,
+            thickness = 1.dp,
+        )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(favorites) { podcast ->
+                FavoritePodcastItem(podcast, dbHandler, refreshFavorites = { refreshFavorites() })
+                Divider(
+                    color = Color.Gray,
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
     }
 }
