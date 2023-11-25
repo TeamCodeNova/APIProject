@@ -25,6 +25,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+
+// Add import statements here as needed
 
 @Composable
 fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
@@ -99,24 +103,47 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
         Text(text = "Content Type: ${podcast.contentType}")
         Text(text = "Author: ${podcast.authorName}")
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { openWebsite() }) {
-            Text("Visit Website")
-        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(
+                onClick = { openWebsite() },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(8.dp)
+            ) {
+                Text(
+                    "Visit",
+                    fontSize = 14.sp
+                )
+            }
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { dbHandler.addFavorite(podcast) },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(8.dp)
+            ) {
+                Text(
+                    "Favorite",
+                    fontSize = 14.sp
+                )
+            }
 
-        // Button to add to favorites
-        Button(onClick = { dbHandler.addFavorite(podcast) }) {
-            Text("Add to Favorites")
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Share button
-        Button(onClick = { sharePodcast() }) {
-            Text("Share Podcast")
+            Button(
+                onClick = { sharePodcast() },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(8.dp)
+            ) {
+                Text(
+                    "Share",
+                    fontSize = 14.sp
+                )
+            }
         }
     }
 }
