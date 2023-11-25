@@ -42,6 +42,20 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
         }
     }
 
+    fun sharePodcast() {
+        val shareContent = buildString {
+            append("Check out this podcast: ${podcast.name}\n")
+            append("Description: ${podcast.description}\n")
+            podcast.websiteUrl?.let { append("Website: $it\n") }
+        }
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareContent)
+            type = "text/plain"
+        }
+        context.startActivity(Intent.createChooser(shareIntent, "Share Podcast"))
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -96,6 +110,13 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
         // Button to add to favorites
         Button(onClick = { dbHandler.addFavorite(podcast) }) {
             Text("Add to Favorites")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Share button
+        Button(onClick = { sharePodcast() }) {
+            Text("Share Podcast")
         }
     }
 }
