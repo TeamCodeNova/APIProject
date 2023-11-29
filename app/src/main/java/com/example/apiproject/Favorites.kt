@@ -23,12 +23,21 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.apiproject.type.Genre
 import com.example.apiproject.type.Language
 import com.example.apiproject.type.PodcastContentType
+import androidx.navigation.NavController
 
 @Composable
-fun Favorites() {
+fun Favorites(navController: NavController) {
     val context = LocalContext.current
+    val userSessionManager = UserSessionManager(context)
     val dbHandler = remember { DBHandler(context) }
     val favorites = remember { mutableStateListOf<SearchForTermQuery.PodcastSeries>() }
+
+    // Redirect to login if not logged in
+    LaunchedEffect(Unit) {
+        if (!userSessionManager.isUserLoggedIn()) {
+            HomeNav(navController)
+        }
+    }
 
     fun refreshFavorites() {
         favorites.clear()
@@ -137,6 +146,10 @@ fun FavoritePodcastItem(
             }
         }
     }
+}
+
+fun HomeNav(navController: NavController) {
+    navController.navigate(NavigationDestinations.LOGIN_SCREEN)
 }
 
 // Extension functions to safely retrieve data from Cursor

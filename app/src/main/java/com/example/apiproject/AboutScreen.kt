@@ -1,22 +1,29 @@
 package com.example.apiproject
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.Text
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 
 @Composable
-fun AboutScreen() {
-    AboutContent()
-}
+fun AboutScreen(navController: NavController) {
+    val context = LocalContext.current
+    val userSessionManager = UserSessionManager(context)
 
-@Composable
-private fun AboutContent() {
+    // Redirect to login if not logged in
+    LaunchedEffect(Unit) {
+        if (!userSessionManager.isUserLoggedIn()) {
+            BackHome(navController)
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -96,4 +103,8 @@ private fun AboutContent() {
             modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         )
     }
+}
+
+fun BackHome(navController: NavController) {
+    navController.navigate(NavigationDestinations.LOGIN_SCREEN)
 }

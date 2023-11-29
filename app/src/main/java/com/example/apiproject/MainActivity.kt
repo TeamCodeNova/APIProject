@@ -38,7 +38,7 @@ private fun MainNavHost() {
         Box(modifier = Modifier.weight(1f)) {
             NavHost(navController, startDestination = NavigationDestinations.SEARCH_SCREEN) {
                 composable(route = NavigationDestinations.SEARCH_SCREEN) {
-                    SearchScreen(onNavigate = { selectedPodcast ->
+                    SearchScreen(navController = navController, onNavigate = { selectedPodcast ->
                         navController.navigate("${NavigationDestinations.PODCAST_DETAIL}/${selectedPodcast.uuid}")
                     })
                 }
@@ -58,13 +58,19 @@ private fun MainNavHost() {
                     }
                 }
                 composable(route = NavigationDestinations.ABOUT_SCREEN) {
-                    AboutScreen()
+                    AboutScreen(navController = navController)
                 }
                 composable(route = NavigationDestinations.FAVORITES_SCREEN) {
-                    Favorites()
+                    Favorites(navController = navController)
                 }
                 composable(route = NavigationDestinations.ACCOUNT_SCREEN) {
-                    AccountScreen()
+                    AccountScreen(navController = navController)
+                }
+                composable(route = NavigationDestinations.LOGIN_SCREEN) {
+                    LoginScreen(navController = navController)
+                }
+                composable(route = NavigationDestinations.REGISTRATION_SCREEN) {
+                    RegistrationScreen(navController = navController)
                 }
             }
         }

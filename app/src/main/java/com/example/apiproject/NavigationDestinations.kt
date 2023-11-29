@@ -6,4 +6,6 @@ object NavigationDestinations {
     const val FAVORITES_SCREEN = "favorites"
     const val ABOUT_SCREEN = "about"
     const val ACCOUNT_SCREEN = "account"
+    const val LOGIN_SCREEN = "login"
+    const val REGISTRATION_SCREEN = "registration"
 }

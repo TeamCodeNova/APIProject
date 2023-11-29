@@ -7,8 +7,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.exception.ApolloException
 import com.example.apiproject.type.Genre
@@ -20,14 +22,20 @@ enum class SortOrder {
 }
 
 @Composable
-fun SearchScreen(onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
+fun SearchScreen(navController: NavController, onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
     var query by remember { mutableStateOf("") }
     var state by remember { mutableStateOf<SearchState>(SearchState.Empty) }
     val scope = rememberCoroutineScope()
-
+    val context = LocalContext.current
+    val userSessionManager = UserSessionManager(context)
     var selectedGenre by remember { mutableStateOf<Genre?>(null) }
     var sortByDatePublished by remember { mutableStateOf<SortOrder?>(null) }
-
+    // Redirect to login if not logged in
+    LaunchedEffect(Unit) {
+        if (!userSessionManager.isUserLoggedIn()) {
+            HomeGo(navController)
+        }
+    }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFAFAFA) // A light background color
@@ -122,6 +130,10 @@ fun SearchScreen(onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
             }
         }
     }
+}
+
+fun HomeGo(navController: NavController) {
+    navController.navigate(NavigationDestinations.LOGIN_SCREEN)
 }
 
 private sealed interface SearchState {

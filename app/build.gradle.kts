@@ -65,6 +65,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("com.apollographql.apollo3:apollo-runtime")
+    implementation("androidx.compose.ui:ui-android:1.5.4")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
