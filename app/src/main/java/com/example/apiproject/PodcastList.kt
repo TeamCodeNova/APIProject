@@ -15,6 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/// <summary>
+/// Displays the Details of a specific podcast
+/// </summary>
+/// <param="data">Single Podcast Data Object</param>
+/// <param="onPodcastClicked">
+/// Event listener for when the a podcast is selected.
+/// When clicked it will open the function specified.
+/// </param>
 @Composable
 fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?, onPodcastClick: (SearchForTermQuery.PodcastSeries?) -> Unit) {
     LazyColumn {
@@ -24,6 +32,14 @@ fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?, onPodcastClick: 
     }
 }
 
+/// <summary>
+/// Displays the basic details of a specific podcast
+/// </summary>
+/// <param="podcast">Single Podcast Object</param>
+/// <param="onPodcastClicked">
+/// Event listener for when the a podcast is selected.
+/// When clicked it will open the function specified.
+/// </param>
 @Composable
 fun PodcastListItem(podcast: SearchForTermQuery.PodcastSeries?, onPodcastClick: (SearchForTermQuery.PodcastSeries?) -> Unit) {
     Card(

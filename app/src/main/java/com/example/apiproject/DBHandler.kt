@@ -6,8 +6,16 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+/// <summary>
+/// Handles all DB Interactions
+/// </summary>
+/// <param="context">Current App's Context</param>
 class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    /// <summary>
+    /// Displays all information about the database.
+    /// This data will be used as constant, and a placeholder for some values in the db.
+    /// </summary>
     companion object {
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "PodcastDB"
@@ -26,6 +34,11 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         const val KEY_AUTHOR = "authorName"
         const val KEY_WEBSITE_URL = "websiteUrl"
     }
+
+    /// <summary>
+    /// Creates the Database and table
+    /// </summary>
+    /// <param="db">Current DB Object</param>
 
     override fun onCreate(db: SQLiteDatabase) {
         val createTableQuery = """
@@ -46,13 +59,32 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.execSQL(createTableQuery)
     }
 
+    /// <summary>
+    /// Activates once data in the companion table changes.
+    /// Will rebuild the database's table, and will remove all records currently in the table
+    /// </summary>
+    /// <param="db">Current DB Object</param>
+    /// <param="oldVersion">Old numeric version of db. Example: 1</param>
+    /// <param="newVersion">New numeric version of db. Example: 2</param>
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Drop older table if it exists and create a new one
         db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
-    // Function to add a podcast to favorites
+    /// <summary>
+    /// This function gets all favourites in descending order
+    /// </summary>
+    /// <return>All favourites in the database</return>
+    fun getAllFavorites(): Cursor {
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_NAME ORDER BY $KEY_ID DESC", null)
+    }
+
+    /// <summary>
+    /// This function will add a podcast to favorites
+    /// </summary>
+    /// <param="podcast"> The podcast item that will be added to favorites </param>
     fun addFavorite(podcast: SearchForTermQuery.PodcastSeries) {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -72,13 +104,10 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
-    // Function to get all favorites in descending order
-    fun getAllFavorites(): Cursor {
-        val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_NAME ORDER BY $KEY_ID DESC", null)
-    }
-
-    // Function to delete a podcast from favorites
+    /// <summary>
+    /// This function will delete a podcasts from favorites
+    /// </summary>
+    /// <param="uuid"> The podcasts Id </param>
     fun deleteFavorite(uuid: String) {
         val db = this.writableDatabase
         db.delete(TABLE_NAME, "$KEY_UUID=?", arrayOf(uuid))

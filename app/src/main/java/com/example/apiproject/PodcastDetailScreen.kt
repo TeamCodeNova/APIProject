@@ -28,6 +28,10 @@ import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 
+/// <summary>
+/// Displays the Details of a specific podcast
+/// </summary>
+/// <param="podcast">Single Podcast Object</param>
 @Composable
 fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
     val context = LocalContext.current
@@ -36,6 +40,10 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
     // Initialize DBHandler
     val dbHandler = DBHandler(context)
 
+    /// <summary>
+    /// The code to open a website when the user presses the button
+    /// to open the website
+    /// </summary>
     fun openWebsite() {
         val websiteUrl = currentPodcast.value.websiteUrl
         if (!websiteUrl.isNullOrBlank()) {
@@ -44,6 +52,9 @@ fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {
         }
     }
 
+    /// <summary>
+    /// The code used to share the podcast on social media
+    /// </summary>
     fun sharePodcast() {
         val shareContent = buildString {
             append("Check out this podcast: ${podcast.name}\n")

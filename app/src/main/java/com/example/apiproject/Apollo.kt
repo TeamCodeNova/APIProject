@@ -6,7 +6,15 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 
+/// <summary>
+/// Read the Interception function for information
+/// </summary>
 private class AuthorizationInterceptor : Interceptor {
+
+    /// <summary>
+    /// Gets Apollo Request that will be built in "apolloClient" value after this class
+    /// </summary>
+    /// <return>Apollo request</return>
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
             .addHeader("X-USER-ID", "599")
@@ -17,6 +25,7 @@ private class AuthorizationInterceptor : Interceptor {
     }
 }
 
+// Builds Apollo request and gives data
 val apolloClient = ApolloClient.Builder()
     .serverUrl("https://api.taddy.org/graphql")
     .okHttpClient(

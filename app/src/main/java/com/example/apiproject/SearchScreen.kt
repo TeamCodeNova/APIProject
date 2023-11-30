@@ -15,10 +15,17 @@ import com.example.apiproject.type.Genre
 import com.example.apiproject.SearchForTermQuery as SearchQuery
 import kotlinx.coroutines.launch
 
+/// <summary>
+/// The sort orders that can be picked
+/// </summary>
 enum class SortOrder {
     LATEST, OLDEST
 }
 
+/// <summary>
+/// Displays the Search screen
+/// </summary>
+/// <param="onNavigate">Used to change the screen</param>
 @Composable
 fun SearchScreen(onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
     var query by remember { mutableStateOf("") }
@@ -124,6 +131,9 @@ fun SearchScreen(onNavigate: (podcast: SearchQuery.PodcastSeries) -> Unit) {
     }
 }
 
+/// <summary>
+/// All possible search states
+/// </summary>
 private sealed interface SearchState {
     object Empty : SearchState
     object Loading : SearchState
@@ -131,10 +141,20 @@ private sealed interface SearchState {
     data class Success(val data: SearchQuery.Data) : SearchState
 }
 
+/// <summary>
+/// A reference to the search code.
+/// </summary>
 object SharedPodcastRepository {
     var podcasts: List<SearchQuery.PodcastSeries?>? = null
 }
 
+/// <summary>
+/// Creates a dropdown menu with all choices being customizable
+/// </summary>
+/// <param="items">All items that will be in the list</param>
+/// <param="selectedItem">The default/current selected</param>
+/// <param="onItemSelected">The function or code to use when an item is pressed</param>
+/// <param="modifier">The modifier</param>
 @Composable
 fun <T> CustomDropdownMenu(
     items: List<T>,
