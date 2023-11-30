@@ -24,19 +24,12 @@ import com.example.apiproject.type.Genre
 import com.example.apiproject.type.Language
 import com.example.apiproject.type.PodcastContentType
 
-/// <summary>
-/// Displays a users favorites
-/// </summary>
 @Composable
 fun Favorites() {
     val context = LocalContext.current
     val dbHandler = remember { DBHandler(context) }
     val favorites = remember { mutableStateListOf<SearchForTermQuery.PodcastSeries>() }
 
-    /// <summary>
-    /// Refreshes the list of displayed favorites
-    /// </summary>
-    /// <return>Apollo request</return>
     fun refreshFavorites() {
         favorites.clear()
         val cursor = dbHandler.getAllFavorites()
@@ -102,13 +95,6 @@ fun Favorites() {
     }
 }
 
-/// <summary>
-/// Display's a podcast item
-/// </summary>
-/// <param="podcast">Podcast Object</param>
-/// <param="dbHandler">An Instance of the DBHandler Class</param>
-/// <param="refreshFavorites">Holds a reference to the refreshDatabase function</param>
-/// <return>Apollo request</return>
 @Composable
 fun FavoritePodcastItem(
     podcast: SearchForTermQuery.PodcastSeries,
@@ -153,53 +139,30 @@ fun FavoritePodcastItem(
     }
 }
 
-/// <summary>
-/// Extension functions to safely retrieve string data from Cursor
-/// </summary>
-/// <param="columnName">The name of the column (String)</param>
-/// <return>The column information if the column index isn't -1 otherwise it will return null</return>
+// Extension functions to safely retrieve data from Cursor
 fun Cursor.getStringSafe(columnName: String): String? {
     val columnIndex = getColumnIndex(columnName)
     return if (columnIndex != -1) getString(columnIndex) else null
 }
 
-/// <summary>
-/// Extension functions to safely retrieve integer data from Cursor
-/// </summary>
-/// <param="columnName">The name of the column (String)</param>
-/// <return>The column information if the column index isn't -1 otherwise it will return null</return>
 fun Cursor.getIntSafe(columnName: String): Int? {
     val columnIndex = getColumnIndex(columnName)
     return if (columnIndex != -1) getInt(columnIndex) else null
 }
 
-/// <summary>
-/// Helper functions to parse enum types
-/// </summary>
-/// <param="genresString">The genres string</param>
-/// <return>A list of podcast items that use a specific genre</return>
+// Helper functions to parse enum types
 fun parseGenres(genresString: String?): List<Genre> {
     return genresString?.split(",")?.mapNotNull { genreString ->
         Genre.values().find { it.name == genreString.trim() }
     } ?: emptyList()
 }
 
-/// <summary>
-/// Helper functions to parse enum types
-/// </summary>
-/// <param="languageString">The language string</param>
-/// <return>A list of podcast items that are in a specific language</return>
 fun parseLanguage(languageString: String?): Language? {
     return languageString?.let {
         Language.values().find { lang -> lang.name == it.trim() }
     }
 }
 
-/// <summary>
-/// Helper functions to parse enum types
-/// </summary>
-/// <param="contentTypeString">The Content Type string</param>
-/// <return>A list of podcast items that use a specific content type</return>
 fun parseContentType(contentTypeString: String?): PodcastContentType? {
     return contentTypeString?.let {
         PodcastContentType.values().find { type -> type.name == it.trim() }

@@ -15,13 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
-/// <summary>
-/// The main screen of the app
-/// </summary>
 class MainActivity : ComponentActivity() {
-    /// <summary>
-    /// On startup will activate this function and set the theme and basic look of the app
-    /// </summary>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,9 +28,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/// <summary>
-/// The Basic navigation controller of the app
-/// </summary>
 @Composable
 private fun MainNavHost() {
     val navController = rememberNavController()

@@ -10,18 +10,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Text
 
-
-/// <summary>
-/// The constructor of the about page
-/// </summary>
 @Composable
 fun AboutScreen() {
     AboutContent()
 }
 
-/// <summary>
-/// Displays about screens contents
-/// </summary>
 @Composable
 private fun AboutContent() {
     Column(

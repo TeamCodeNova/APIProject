@@ -11,10 +11,6 @@ import androidx.navigation.NavController
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 
-/// <summary>
-/// The global app header
-/// </summary>
-/// <param="navController">The navigation menu object</param>
 @Composable
 fun AppHeader(navController: NavController) {
     Row(
