@@ -1,4 +1,4 @@
-package com.example.apiproject.screens
+package com.example.apiproject.Screens
 
 import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
@@ -11,9 +11,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import com.example.apiproject.database.DBHandler
-import com.example.apiproject.navigation.NavigationDestinations
-import com.example.apiproject.sessions.UserSessionManager
+import com.example.apiproject.Database.DBHandler
+import com.example.apiproject.Navigation.NavigationDestinations
+import com.example.apiproject.Sessions.UserSessionManager
 
 @Composable
 fun AccountScreen(navController: NavController) {
