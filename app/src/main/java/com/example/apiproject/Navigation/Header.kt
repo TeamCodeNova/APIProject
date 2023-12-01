@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Navigation
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -17,6 +17,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.example.apiproject.R
+import com.example.apiproject.Sessions.UserSessionManager
 
 fun logoutUser(context: Context, navController: NavController) {
     UserSessionManager(context).logoutUser()

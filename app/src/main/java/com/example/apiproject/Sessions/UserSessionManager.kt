@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Sessions
 
 import android.content.Context
 import android.content.SharedPreferences

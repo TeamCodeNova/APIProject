@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Screens
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,8 @@ import android.widget.Toast
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.Alignment
 import androidx.navigation.NavController
+import com.example.apiproject.Database.DBHandler
+import com.example.apiproject.Navigation.NavigationDestinations
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +55,7 @@ fun RegistrationScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = {handleRegistration(navController, username, password, dbHandler, context) }
+            onClick = { handleRegistration(navController, username, password, dbHandler, context) }
         ) {
             Text("Register")
         }

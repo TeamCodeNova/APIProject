@@ -14,6 +14,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.apiproject.Navigation.AppHeader
+import com.example.apiproject.Navigation.NavigationDestinations
+import com.example.apiproject.Screens.AboutScreen
+import com.example.apiproject.Screens.AccountScreen
+import com.example.apiproject.Screens.Favorites
+import com.example.apiproject.Screens.LoginScreen
+import com.example.apiproject.Screens.PodcastDetailScreen
+import com.example.apiproject.Screens.RegistrationScreen
+import com.example.apiproject.Screens.SearchScreen
+import com.example.apiproject.Screens.SharedPodcastRepository
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

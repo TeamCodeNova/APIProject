@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Screens
 
 import android.content.Intent
 import android.net.Uri
@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import com.example.apiproject.Database.DBHandler
+import com.example.apiproject.SearchForTermQuery
 
 @Composable
 fun PodcastDetailScreen(podcast: SearchForTermQuery.PodcastSeries) {

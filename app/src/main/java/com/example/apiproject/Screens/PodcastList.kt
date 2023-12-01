@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.apiproject.SearchForTermQuery
 
 @Composable
 fun PodcastList(data: List<SearchForTermQuery.PodcastSeries?>?, onPodcastClick: (SearchForTermQuery.PodcastSeries?) -> Unit) {

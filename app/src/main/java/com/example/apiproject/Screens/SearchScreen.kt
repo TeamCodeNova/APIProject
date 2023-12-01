@@ -1,4 +1,4 @@
-package com.example.apiproject
+package com.example.apiproject.Screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,6 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.exception.ApolloException
+import com.example.apiproject.Navigation.NavigationDestinations
+import com.example.apiproject.Sessions.UserSessionManager
+import com.example.apiproject.Apollo.apolloClient
 import com.example.apiproject.type.Genre
 import com.example.apiproject.SearchForTermQuery as SearchQuery
 import kotlinx.coroutines.launch
