@@ -1,4 +1,4 @@
-package com.example.apiproject.Screens
+package com.example.apiproject.screens
 
 import android.content.Context
 import android.widget.Toast
@@ -18,9 +18,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.runtime.Composable
-import com.example.apiproject.Database.DBHandler
-import com.example.apiproject.Navigation.NavigationDestinations
-import com.example.apiproject.Sessions.UserSessionManager
+import com.example.apiproject.database.DBHandler
+import com.example.apiproject.navigation.NavigationDestinations
+import com.example.apiproject.sessions.UserSessionManager
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,4 +1,4 @@
-package com.example.apiproject.Screens
+package com.example.apiproject.screens
 
 import android.content.Intent
 import android.database.Cursor
@@ -24,10 +24,10 @@ import com.example.apiproject.type.Genre
 import com.example.apiproject.type.Language
 import com.example.apiproject.type.PodcastContentType
 import androidx.navigation.NavController
-import com.example.apiproject.Database.DBHandler
-import com.example.apiproject.Navigation.NavigationDestinations
+import com.example.apiproject.database.DBHandler
+import com.example.apiproject.navigation.NavigationDestinations
 import com.example.apiproject.SearchForTermQuery
-import com.example.apiproject.Sessions.UserSessionManager
+import com.example.apiproject.sessions.UserSessionManager
 
 @Composable
 fun Favorites(navController: NavController) {

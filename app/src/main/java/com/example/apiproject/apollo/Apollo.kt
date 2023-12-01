@@ -1,4 +1,4 @@
-package com.example.apiproject.Apollo
+package com.example.apiproject.apollo
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient

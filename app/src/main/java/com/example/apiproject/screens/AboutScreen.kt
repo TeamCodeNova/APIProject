@@ -1,4 +1,4 @@
-package com.example.apiproject.Screens
+package com.example.apiproject.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import com.example.apiproject.Navigation.NavigationDestinations
-import com.example.apiproject.Sessions.UserSessionManager
+import com.example.apiproject.navigation.NavigationDestinations
+import com.example.apiproject.sessions.UserSessionManager
 
 @Composable
 fun AboutScreen(navController: NavController) {

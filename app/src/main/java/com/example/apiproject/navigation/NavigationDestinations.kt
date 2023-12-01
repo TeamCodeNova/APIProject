@@ -1,4 +1,4 @@
-package com.example.apiproject.Navigation
+package com.example.apiproject.navigation
 
 object NavigationDestinations {
     const val SEARCH_SCREEN = "search"
